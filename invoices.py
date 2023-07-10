@@ -14,10 +14,15 @@ for filepath in filepaths:
     pdf.add_page()
     filename = Path(filepath).stem
     # extracts the name of the filename, this case 10001 is extracted.
-    invoice_nr=filename.split("-")[0]
+    invoice_nr, date = filename.split("-")
+    #or it can  be written as
+    # date = filename.split("-")[1]
     # sets the font family,size and style of the letters
     pdf.set_font(family="Times",size=16, style="B")
     # sets the cell width and height and text is printed. Here txt name is dynamically taken
-    pdf.cell(w=50,h=8, txt=f"Invoice num.{invoice_nr}")
+    pdf.cell(w=50,h=8, txt=f"Invoice num.{invoice_nr}",ln=1)
     # creates a pdf folder and related files are created.
+
+    pdf.set_font(family="Times", size=16, style="B")
+    pdf.cell(w=50, h=8, txt=f"Date:{date}")
     pdf.output(f"PDFs/{filename}.pdf")
